@@ -33,6 +33,7 @@ console.log(sub(2, 1));
 //console.log(__filename);
 */
 
+/*
 const add = require("./calculator/add");
 const sub = require("./calculator/sub");
 const mul = require("./calculator/mul");
@@ -60,3 +61,37 @@ switch (true) {
   default:
     console.log(`${fileName}`);
 }
+*/
+
+// FILE SYSTEM MODULE
+
+const fs = require("fs");
+
+// Write File
+fs.writeFile("./app.txt", "Hi", (err) => {
+  if (err) console.log(err);
+  else console.log("File Just Created");
+});
+
+// Read File
+fs.readFile("./app.txt", "utf-8", (err, data) => {
+  if (err) console.log(err);
+  else console.log(data);
+});
+
+// Rename Fiel
+fs.rename("./app.txt", "./helper.txt", (err) => {
+  if (err) console.log(err);
+  else console.log("File Successfuly Rename");
+});
+
+// Delete File
+fs.writeFile("./app2.txt", "Test For DELETE", (err) => {
+  if (err) console.log(err);
+  else console.log("File Just Created");
+});
+
+fs.unlink("./app2.txt", (err) => {
+  if (err) console.log(err);
+  else console.log("DELETED FILE");
+});
