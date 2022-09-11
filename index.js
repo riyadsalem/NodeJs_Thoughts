@@ -65,6 +65,7 @@ switch (true) {
 
 // FILE SYSTEM MODULE
 
+/*
 const fs = require("fs");
 
 // Write File
@@ -95,3 +96,19 @@ fs.unlink("./app2.txt", (err) => {
   if (err) console.log(err);
   else console.log("DELETED FILE");
 });
+*/
+
+const fs = require("fs").promises;
+
+async function getSum() {
+  let data = await fs.readFile("./data.json", "utf-8");
+  data = JSON.parse(data);
+
+  let sum = 0;
+  for (let user of data) {
+    sum += user.Salary;
+  }
+  console.log(sum);
+}
+
+getSum();

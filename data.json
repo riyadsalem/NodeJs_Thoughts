@@ -1,0 +1,11 @@
+[
+  { "name": "A", "Salary": 4000 },
+  { "name": "B", "Salary": 2000 },
+  { "name": "C", "Salary": 3000 },
+  { "name": "D", "Salary": 8000 },
+  { "name": "C", "Salary": 9000 },
+  { "name": "E", "Salary": 6000 },
+  { "name": "F", "Salary": 7000 },
+  { "name": "G", "Salary": 5000 },
+  { "name": "I", "Salary": 1000 }
+]
