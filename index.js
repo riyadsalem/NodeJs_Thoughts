@@ -11,6 +11,7 @@ const obj = {
 };
 
 console.log(obj, obj._sum());
+console.log("End");
 
 // console.log(window); // Web API
 // console.log(document); // Web API
