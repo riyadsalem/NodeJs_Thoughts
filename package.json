@@ -13,5 +13,8 @@
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "validator": "^13.7.0"
   }
 }

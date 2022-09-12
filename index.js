@@ -136,6 +136,7 @@ const server = http.createServer(async (req, res) => {
 server.listen(3000);
 */
 
+/*
 const http = require("http");
 const url = require("url");
 
@@ -153,3 +154,12 @@ server.listen(3000);
 
 // http://localhost:3000/product?id=1&category=teshirt
 // 0 - 65535
+*/
+
+// NPM MODULE
+const validator = require("validator");
+
+console.log(validator.isEmail("riyad.m.salem.19988@gmail.com")); // true
+console.log(validator.isJSON(JSON.stringify({ name: "riyad" }))); // true
+console.log(validator.isPort("3000")); //true
+console.log(validator.isPort("85858585858585858")); //false
