@@ -116,12 +116,20 @@ getSum();
 */
 
 // HTTP MODULE
-const http = require("http");
+// Create a Server
+// Read a html File
+// Send this data as a response from server
 
-const server = http.createServer((req, res) => {
+const http = require("http");
+const fs = require("fs").promises;
+
+const server = http.createServer(async (req, res) => {
   console.log("SERVER IS NOW RUNING");
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("<h1>HI</h1>");
+  //res.writeHead(200, { "Content-Type": "text/plain" });
+  //res.end("<h1>HI</h1>");
+  const data = await fs.readFile("./new.html", "utf-8");
+  res.writeHead(200, { "Content-type": "text/html" });
+  res.end(data);
 });
 
 server.listen(3000);
