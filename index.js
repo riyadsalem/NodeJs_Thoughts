@@ -98,6 +98,7 @@ fs.unlink("./app2.txt", (err) => {
 });
 */
 
+/*
 const fs = require("fs").promises;
 
 async function getSum() {
@@ -112,3 +113,15 @@ async function getSum() {
 }
 
 getSum();
+*/
+
+// HTTP MODULE
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  console.log("SERVER IS NOW RUNING");
+  res.writeHead(200, { "Content-Type": "text/plain" });
+  res.end("<h1>HI</h1>");
+});
+
+server.listen(3000);
