@@ -115,6 +115,7 @@ async function getSum() {
 getSum();
 */
 
+/*
 // HTTP MODULE
 // Create a Server
 // Read a html File
@@ -133,3 +134,22 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(3000);
+*/
+
+const http = require("http");
+const url = require("url");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/favicon.ico") return;
+  const myURL = new URL(req.url, "http://localhost:3000/");
+  console.log(myURL);
+  console.log(myURL.pathname);
+
+  console.log("Server is now runing");
+  res.writeHead(200, { "Content-type": "text/html" });
+  res.end("<h1>HI<h1>");
+});
+server.listen(3000);
+
+// http://localhost:3000/product?id=1&category=teshirt
+// 0 - 65535
