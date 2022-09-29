@@ -8,8 +8,6 @@ app.get("/", (req, res) => {
 });
 
 /*
- * Show List Of Products
- * Show Specific products
  * Insert A Product Data
  * Update Specific Product Data ( Using PUT Method)
  * Update Specific Proudct Data (Using PATCH Method)
@@ -17,6 +15,16 @@ app.get("/", (req, res) => {
  * Delete All Preoducts Data
  */
 
+// Show List of Products
 app.get("/api/products", (req, res) => {
   res.json(products);
+});
+
+app.get("/api/products/:id", (req, res) => {
+  const { id } = req.params;
+  const product = products.find((prod) => prod.id === 1);
+
+  return !product
+    ? res.status(404).json({ error: "No Product Found with this ID" })
+    : res.json(product);
 });
