@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const products = require("./products");
-
 const { v4: uuidv4 } = require("uuid");
+const Joi = require("joi");
 
 app.listen(3000, () => console.log("SERVER is running at port 3000"));
 
@@ -35,6 +35,19 @@ app.get("/api/products/:id", (req, res) => {
 // Insert A Product Data
 app.use(express.json());
 app.post("/api/insertProducts", (req, res) => {
+  const schema = Joi.object({
+    name: Joi.string().min(3).max(20).required(),
+    price: Joi.number().required(),
+  });
+
+  const { error } = schema.validate(req.body);
+
+  if (error) {
+    return res.status(400).json({
+      message: error.details[0].message,
+    });
+  }
+
   const product = {
     id: uuidv4(),
     name: req.body.name,
