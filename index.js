@@ -11,7 +11,6 @@ app.get("/", (req, res) => {
 });
 
 /*
- * Delete A Specific Product Data
  * Delete All Preoducts Data
  */
 
@@ -113,4 +112,18 @@ app.patch("/api/updateProductPATCH/:id", (req, res) => {
 
   products[index] = updateproduct;
   return res.json(updateproduct);
+});
+
+// Delete A Specific Product Data
+app.delete("/api/deleteProduct/:id", (req, res) => {
+  const product = products.find((prod) => prod.id === Number(req.params.id));
+  if (!product) {
+    return res.status(404).json({
+      message: "Product is not found with this ID",
+    });
+  }
+
+  const index = products.findIndex((prod) => prod.id === Number(req.body.id));
+  products.splice(index, 1);
+  return res.json(products);
 });
