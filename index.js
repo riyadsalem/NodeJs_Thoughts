@@ -10,10 +10,6 @@ app.get("/", (req, res) => {
   res.send("HOME PAGE");
 });
 
-/*
- * Delete All Preoducts Data
- */
-
 // Show List of Products
 app.get("/api/products", (req, res) => {
   res.json(products);
@@ -125,5 +121,11 @@ app.delete("/api/deleteProduct/:id", (req, res) => {
 
   const index = products.findIndex((prod) => prod.id === Number(req.body.id));
   products.splice(index, 1);
+  return res.json(products);
+});
+
+// Delete All Preoducts Data
+app.delete("/api/deleteAllProducts", (req, res) => {
+  products.splice(0);
   return res.json(products);
 });
