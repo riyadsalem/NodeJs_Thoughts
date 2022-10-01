@@ -25,6 +25,7 @@ app.get("/api/products/:id", (req, res) => {
     : res.json(product);
 });
 
+// VALIDATION FUNCTION
 const validation = (body) => {
   const schema = Joi.object({
     name: Joi.string().min(3).max(20).required(),
