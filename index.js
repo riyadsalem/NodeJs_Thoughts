@@ -72,7 +72,19 @@ fetchInformation();
 async function db() {
   // const users = await User.find().or([{ isMarried: true }, { age: 30 }]);
   // const users = await User.find().and([{ isMarried: false }, { age: 30 }]);
-  const users = await User.find({ isMarried: false, age: 30 }); // and([{},{}])
+  // const users = await User.find({ isMarried: false, age: 30 }); // and([{},{}])
+
+  /*
+  // Problem Solve
+  // Find Those users whose age is greater thaen 40 or they are unmarried 
+  // find only name 
+  // shorted them by name
+  */
+
+  const users = await User.find()
+    .or([{ age: { $gt: 40 } }, { isMarried: false }])
+    .select("name")
+    .sort("name"); // A B C D E .....
 
   console.log(users);
 }
