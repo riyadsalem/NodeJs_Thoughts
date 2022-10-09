@@ -61,7 +61,7 @@ async function fetchInformation() {
   // const users = await User.find({ isMarried: false }).countDocuments();
   // const users = await User.find({ age: { $gte: 30 } });
   // const users = await User.find({ age: { $lte: 30 } });
-  const users = await User.find({ age: { $in: 30 } });
+  const users = await User.find({ salary: { $in: [25000, 40000, 45000] } });
 
   console.log(users);
 }
