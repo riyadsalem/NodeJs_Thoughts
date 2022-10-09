@@ -1,4 +1,4 @@
-const { func } = require("joi");
+const { func, equal } = require("joi");
 const mongoose = require("mongoose");
 mongoose
   .connect("mongodb://localhost:27017/test")
@@ -51,6 +51,7 @@ in =>  values specified in an array.
 nin =>  none of the values specified in an array.
 */
 
+/*
 async function fetchInformation() {
   //  const users = await User.find({});
   // const users = await User.findOne({ isMarried: false });
@@ -61,8 +62,18 @@ async function fetchInformation() {
   // const users = await User.find({ isMarried: false }).countDocuments();
   // const users = await User.find({ age: { $gte: 30 } });
   // const users = await User.find({ age: { $lte: 30 } });
-  const users = await User.find({ salary: { $in: [25000, 40000, 45000] } });
+  // const users = await User.find({ salary: { $in: [25000, 40000, 45000] } });
 
   console.log(users);
 }
 fetchInformation();
+*/
+
+async function db() {
+  // const users = await User.find().or([{ isMarried: true }, { age: 30 }]);
+  // const users = await User.find().and([{ isMarried: false }, { age: 30 }]);
+  const users = await User.find({ isMarried: false, age: 30 }); // and([{},{}])
+
+  console.log(users);
+}
+db();
