@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const colors = require("colors");
 mongoose
   .connect("mongodb://localhost:27017/task")
   .then(() => console.log("DATABASE IS CONECTED"))
@@ -18,7 +19,7 @@ async function db() {
     await user.save();
     console.log(user);
   } catch (error) {
-    console.log(error.message);
+    console.log(colors.red.underline.bold(error.message));
   }
 }
 db();
