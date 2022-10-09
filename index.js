@@ -92,11 +92,31 @@ async function db() {
 db();
 */
 
+/*
+User.findById("634279640efbc70b5203cbec")
+  .then((user) => {
+    user.age = 24;
+    console.log(user);
+  })
+  .catch((error) => console.log(error));
+*/
+
 async function updateInformation() {
+  /*
   const user = await User.findById("634279640efbc70b5203cbec");
-  user.isMarried = true;
+  user.isMarried = false;
   await user.save();
   console.log(user);
-}
+  */
 
+  const user = await User.findByIdAndUpdate(
+    "634279640efbc70b5203cbec",
+    {
+      isMarried: true,
+      age: 24.9,
+    },
+    { new: true, isValidators: true }
+  );
+  console.log(user);
+}
 updateInformation();
