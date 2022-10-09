@@ -22,3 +22,17 @@ const userShcema = new mongoose.Schema({
 });
 
 const User = mongoose.model("User", userShcema);
+
+async function storeInformation() {
+  const user = new User({
+    name: "RIYAD",
+    age: 24,
+    isMarried: false,
+    salary: 100,
+    gender: "Male",
+  });
+  await user.save();
+  console.log(user);
+}
+
+storeInformation();
