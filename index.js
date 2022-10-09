@@ -40,9 +40,13 @@ storeInformation();
 */
 
 async function fetchInformation() {
-  // const users = await User.find({ isMarried: false });
+  //  const users = await User.find({});
   // const users = await User.findOne({ isMarried: false });
-  const users = await User.findById("63426bb127b3f52886f8acfd");
+  // const users = await User.findById("63426bb127b3f52886f8acfd");
+  // const users = await User.find({ isMarried: false }).select("name salary");
+  // const users = await User.find({ isMarried: false }).select("-name ").sort("salary"); // AEC
+  // const users = await User.find({ isMarried: false }).select("-name ").sort("-salary").limit(2);  // DEC
+  const users = await User.find({ isMarried: false }).countDocuments();
 
   console.log(users);
 }
