@@ -1,3 +1,4 @@
+const { func } = require("joi");
 const mongoose = require("mongoose");
 mongoose
   .connect("mongodb://localhost:27017/test")
@@ -23,6 +24,7 @@ const userShcema = new mongoose.Schema({
 
 const User = mongoose.model("User", userShcema);
 
+/*
 async function storeInformation() {
   const user = new User({
     name: "RIYAD",
@@ -34,5 +36,14 @@ async function storeInformation() {
   await user.save();
   console.log(user);
 }
-
 storeInformation();
+*/
+
+async function fetchInformation() {
+  // const users = await User.find({ isMarried: false });
+  // const users = await User.findOne({ isMarried: false });
+  const users = await User.findById("63426bb127b3f52886f8acfd");
+
+  console.log(users);
+}
+fetchInformation();
