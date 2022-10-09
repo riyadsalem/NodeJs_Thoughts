@@ -101,14 +101,16 @@ User.findById("634279640efbc70b5203cbec")
   .catch((error) => console.log(error));
 */
 
+/*
 async function updateInformation() {
-  /*
-  const user = await User.findById("634279640efbc70b5203cbec");
-  user.isMarried = false;
-  await user.save();
-  console.log(user);
-  */
+  
+  // const user = await User.findById("634279640efbc70b5203cbec");
+  // user.isMarried = false;
+  // await user.save();
+  // console.log(user);
+  
 
+  
   const user = await User.findByIdAndUpdate(
     "634279640efbc70b5203cbec",
     {
@@ -120,3 +122,12 @@ async function updateInformation() {
   console.log(user);
 }
 updateInformation();
+*/
+
+const deleteInformation = async function () {
+  await User.findByIdAndDelete("6027d22c7dd46d17c04bdf90");
+  // await User.deleteOne({ _id: "634279640efbc70b5203cbec" });
+  // await User.deleteMany({ isMarried: false });
+};
+
+deleteInformation();
