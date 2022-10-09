@@ -25,18 +25,30 @@ const userShcema = new mongoose.Schema({
 const User = mongoose.model("User", userShcema);
 
 /*
-async function storeInformation() {
-  const user = new User({
-    name: "RIYAD",
-    age: 24,
-    isMarried: false,
-    salary: 100,
-    gender: "Male",
-  });
-  await user.save();
-  console.log(user);
-}
-storeInformation();
+  async function storeInformation() {
+    const user = new User({
+      name: "RIYAD",
+      age: 24,
+      isMarried: false,
+      salary: 100,
+      gender: "Male",
+    });
+    await user.save();
+    console.log(user);
+  }
+  storeInformation();
+  */
+
+/*
+// Comparison Operator
+eq => equal 
+ne => not equal 
+gt => greater than
+gte => greater than or equal 
+lt => less than 
+lte => less than or equal
+in =>  values specified in an array.
+nin =>  none of the values specified in an array.
 */
 
 async function fetchInformation() {
@@ -46,7 +58,10 @@ async function fetchInformation() {
   // const users = await User.find({ isMarried: false }).select("name salary");
   // const users = await User.find({ isMarried: false }).select("-name ").sort("salary"); // AEC
   // const users = await User.find({ isMarried: false }).select("-name ").sort("-salary").limit(2);  // DEC
-  const users = await User.find({ isMarried: false }).countDocuments();
+  // const users = await User.find({ isMarried: false }).countDocuments();
+  // const users = await User.find({ age: { $gte: 30 } });
+  // const users = await User.find({ age: { $lte: 30 } });
+  const users = await User.find({ age: { $in: 30 } });
 
   console.log(users);
 }
