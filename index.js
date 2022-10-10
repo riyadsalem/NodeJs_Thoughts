@@ -81,3 +81,13 @@ app.post("/user", async (req, res) => {
     return res.status(400).json({ success: false, message: error.message });
   }
 });
+
+app.get("/task", async (req, res) => {
+  const tasks = await Task.find({});
+  return res.status(200).json({ success: true, tasks });
+});
+
+app.get("/user", async (req, res) => {
+  const users = await User.find({});
+  return res.status(200).json({ success: true, users });
+});
