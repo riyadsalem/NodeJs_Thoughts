@@ -4,6 +4,7 @@
   "description": "Learning Node.Js",
   "main": "index.js",
   "scripts": {
+    "start": "node idnex",
     "server": "nodemon index.js"
   },
   "keywords": [

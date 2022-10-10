@@ -58,3 +58,15 @@ async function db() {
 // /user/:id DELETE
 
 */
+app.use(express.json());
+
+app.post("/task", async (req, res) => {
+  try {
+    const task = new Task(req.body);
+    await task.save();
+    console.log(task);
+    return res.status(201).json({ success: true, task });
+  } catch (error) {
+    return res.status(404).json({ success: false, message: error.message });
+  }
+});
