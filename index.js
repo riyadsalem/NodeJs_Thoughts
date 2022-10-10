@@ -91,3 +91,14 @@ app.get("/user", async (req, res) => {
   const users = await User.find({});
   return res.status(200).json({ success: true, users });
 });
+
+app.get("/task/:id", async (req, res) => {
+  const { id } = req.params;
+  const task = await Task.findById(id);
+  return res.json({ success: true, task });
+});
+
+app.get("/user/:id", async (req, res) => {
+  const user = await User.findById(req.params.id);
+  return res.json({ success: true, user });
+});
