@@ -102,3 +102,9 @@ app.get("/user/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
   return res.json({ success: true, user });
 });
+
+app.get("/task/update/:id", (req, res) => {
+  const task = Task.findById(req.params.id);
+  task.description = "TWO Description";
+  return res.status(200).json({ success: true, task });
+});
