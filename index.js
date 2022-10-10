@@ -10,6 +10,7 @@ const Task = require("./model/Task.js");
 
 async function db() {
   try {
+    /*
     const user = new User({
       name: "Riyad",
       age: 24,
@@ -18,6 +19,14 @@ async function db() {
     });
     await user.save();
     console.log(user);
+    */
+
+    const task = new Task({
+      description: "This is TASK 1",
+      isCompleted: true,
+    });
+    await task.save();
+    console.log(task);
   } catch (error) {
     console.log(colors.red.underline.bold(error.message));
   }
