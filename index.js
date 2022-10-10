@@ -8,9 +8,19 @@ mongoose
 const User = require("./model/User.js");
 const Task = require("./model/Task.js");
 
+const express = require("express");
+const app = express();
+
+const port = process.env.PORT || 4040;
+app.listen(port, () => {
+  console.log(`SERVER IS RUNNING AT PORT ${port}`);
+});
+
+/*
 async function db() {
   try {
-    /*
+    
+    //
     const user = new User({
       name: "Riyad",
       age: 24,
@@ -19,7 +29,7 @@ async function db() {
     });
     await user.save();
     console.log(user);
-    */
+    //
 
     const task = new Task({
       description: "This is TASK 1",
@@ -31,4 +41,20 @@ async function db() {
     console.log(colors.red.underline.bold(error.message));
   }
 }
-db();
+  db();
+*/
+
+/*
+// /task POST
+// /task GET
+// /task/:id Get 
+// /task/:id Patch
+// /task/:id DELETE
+
+// /user POST
+// /user GET
+// /user/:id Get 
+// /user/:id Patch
+// /user/:id DELETE
+
+*/
