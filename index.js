@@ -67,6 +67,17 @@ app.post("/task", async (req, res) => {
     console.log(task);
     return res.status(201).json({ success: true, task });
   } catch (error) {
-    return res.status(404).json({ success: false, message: error.message });
+    return res.status(400).json({ success: false, message: error.message });
+  }
+});
+
+app.post("/user", async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    console.log(user);
+    return res.status(201).json({ success: true, user });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
   }
 });
