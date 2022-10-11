@@ -151,3 +151,25 @@ app.patch("/task/:id", async (req, res) => {
     return res.status(400).json({ success: false, message: error.message });
   }
 });
+
+app.delete("/user/:id", async (req, res) => {
+  // await User.deleteOne("63443602ea1080dc1656f67f");
+  // await User.deleteMany({ age: 24 });
+
+  const user = await User.findByIdAndDelete(req.params.id);
+  if (!user) {
+    return res.status(404).json({ success: false, message: "Task not found" });
+  }
+  return res.status(200).json({ success: true, user });
+});
+
+app.delete("/task/:id", async (req, res) => {
+  // await Task.deleteOne("63443602ea1080dc1656f67f");
+  // await Task.deleteMany({ age: 24 });
+
+  const task = await Task.findByIdAndDelete(req.params.id);
+  if (!task) {
+    return res.status(404).json({ success: false, message: "Task not found" });
+  }
+  return res.status(200).json({ success: true, task });
+});
