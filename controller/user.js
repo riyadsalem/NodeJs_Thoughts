@@ -31,16 +31,27 @@ exports.getSingleUser = async (req, res) => {
 exports.updateUser = async (req, res) => {
   try {
     const { id } = req.params;
+    /*
     const user = await User.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
     });
+    */
+
+    const user = await User.findById(id);
 
     if (!user) {
       return res
         .status(404)
         .json({ success: false, message: "User not found" });
     }
+
+    const keys = Object.keys(req.body);
+    for (let key of keys) {
+      user[key] = req.body[key];
+    }
+
+    await user.save();
 
     return res.status(201).json({ success: true, user });
   } catch (error) {
