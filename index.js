@@ -95,16 +95,59 @@ app.get("/user", async (req, res) => {
 app.get("/task/:id", async (req, res) => {
   const { id } = req.params;
   const task = await Task.findById(id);
+
+  if (!user) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+
   return res.json({ success: true, task });
 });
 
 app.get("/user/:id", async (req, res) => {
   const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return res.status(404).json({ success: false, message: "User not found" });
+  }
+
   return res.json({ success: true, user });
 });
 
-app.get("/task/update/:id", (req, res) => {
-  const task = Task.findById(req.params.id);
-  task.description = "TWO Description";
-  return res.status(200).json({ success: true, task });
+app.patch("/user/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    return res.status(201).json({ success: true, user });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
+});
+
+app.patch("/task/:id", async (req, res) => {
+  try {
+    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!task) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Task not found" });
+    }
+
+    return res.status(201).json({ success: true, task });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: error.message });
+  }
 });
