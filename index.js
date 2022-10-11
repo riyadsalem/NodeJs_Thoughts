@@ -5,171 +5,17 @@ mongoose
   .then(() => console.log("DATABASE IS CONECTED"))
   .catch((error) => console.log(error));
 
-const User = require("./model/User.js");
-const Task = require("./model/Task.js");
-
 const express = require("express");
 const app = express();
+
+const userRoutes = require("./routes/user");
+const taskRoutes = require("./routes/task");
 
 const port = process.env.PORT || 4040;
 app.listen(port, () => {
   console.log(`SERVER IS RUNNING AT PORT ${port}`);
 });
 
-/*
-async function db() {
-  try {
-    
-    //
-    const user = new User({
-      name: "Riyad",
-      age: 24,
-      email: "riayd.m.salem.19988@gmail.com",
-      password: "12345",
-    });
-    await user.save();
-    console.log(user);
-    //
-
-    const task = new Task({
-      description: "This is TASK 1",
-      isCompleted: true,
-    });
-    await task.save();
-    console.log(task);
-  } catch (error) {
-    console.log(colors.red.underline.bold(error.message));
-  }
-}
-  db();
-*/
-
-/*
-// /task POST
-// /task GET
-// /task/:id Get 
-// /task/:id Patch
-// /task/:id DELETE
-
-// /user POST
-// /user GET
-// /user/:id Get 
-// /user/:id Patch
-// /user/:id DELETE
-
-*/
 app.use(express.json());
-
-app.post("/task", async (req, res) => {
-  try {
-    const task = new Task(req.body);
-    await task.save();
-    console.log(task);
-    return res.status(201).json({ success: true, task });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-});
-
-app.post("/user", async (req, res) => {
-  try {
-    const user = new User(req.body);
-    await user.save();
-    console.log(user);
-    return res.status(201).json({ success: true, user });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-});
-
-app.get("/task", async (req, res) => {
-  const tasks = await Task.find({});
-  return res.status(200).json({ success: true, tasks });
-});
-
-app.get("/user", async (req, res) => {
-  const users = await User.find({});
-  return res.status(200).json({ success: true, users });
-});
-
-app.get("/task/:id", async (req, res) => {
-  const { id } = req.params;
-  const task = await Task.findById(id);
-
-  if (!user) {
-    return res.status(404).json({ success: false, message: "User not found" });
-  }
-
-  return res.json({ success: true, task });
-});
-
-app.get("/user/:id", async (req, res) => {
-  const user = await User.findById(req.params.id);
-
-  if (!user) {
-    return res.status(404).json({ success: false, message: "User not found" });
-  }
-
-  return res.json({ success: true, user });
-});
-
-app.patch("/user/:id", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await User.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!user) {
-      return res
-        .status(404)
-        .json({ success: false, message: "User not found" });
-    }
-
-    return res.status(201).json({ success: true, user });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-});
-
-app.patch("/task/:id", async (req, res) => {
-  try {
-    const task = await Task.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!task) {
-      return res
-        .status(404)
-        .json({ success: false, message: "Task not found" });
-    }
-
-    return res.status(201).json({ success: true, task });
-  } catch (error) {
-    return res.status(400).json({ success: false, message: error.message });
-  }
-});
-
-app.delete("/user/:id", async (req, res) => {
-  // await User.deleteOne("63443602ea1080dc1656f67f");
-  // await User.deleteMany({ age: 24 });
-
-  const user = await User.findByIdAndDelete(req.params.id);
-  if (!user) {
-    return res.status(404).json({ success: false, message: "Task not found" });
-  }
-  return res.status(200).json({ success: true, user });
-});
-
-app.delete("/task/:id", async (req, res) => {
-  // await Task.deleteOne("63443602ea1080dc1656f67f");
-  // await Task.deleteMany({ age: 24 });
-
-  const task = await Task.findByIdAndDelete(req.params.id);
-  if (!task) {
-    return res.status(404).json({ success: false, message: "Task not found" });
-  }
-  return res.status(200).json({ success: true, task });
-});
+app.use(userRoutes);
+app.use(taskRoutes);
