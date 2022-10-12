@@ -6,6 +6,7 @@ const {
   getSingleUser,
   updateUser,
   deleteUser,
+  login,
 } = require("../controller/user");
 /*
 // /user POST
@@ -15,6 +16,8 @@ const {
 // /user/:id DELETE
 */
 router.post("/user", storeUser);
+
+router.post("/user/login", login);
 
 router.get("/user", fetchAllUser);
 

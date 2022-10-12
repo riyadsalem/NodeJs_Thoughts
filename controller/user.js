@@ -1,5 +1,5 @@
 const User = require("../model/User");
-// const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs");
 
 exports.storeUser = async (req, res) => {
   try {
@@ -68,4 +68,28 @@ exports.deleteUser = async (req, res) => {
     return res.status(404).json({ success: false, message: "User not found" });
   }
   return res.status(200).json({ success: true, user });
+};
+
+exports.login = async (req, res) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid Email/Password",
+    });
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    return res.status(401).json({
+      success: false,
+      message: "Invalid Email/Password",
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    user,
+  });
 };
